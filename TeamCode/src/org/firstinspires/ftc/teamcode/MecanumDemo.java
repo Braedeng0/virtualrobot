@@ -47,22 +47,17 @@ public class MecanumDemo extends LinearOpMode {
             double pa = gamepad1.left_trigger - gamepad1.right_trigger;
 
             if (Math.abs(pa) < 0.05) pa = 0;
+
             double p1 = -px + py - pa;
             double p2 = px + py + -pa;
             double p3 = -px + py + pa;
             double p4 = px + py + pa;
-            double max = Math.max(1.0, Math.abs(p1));
-            max = Math.max(max, Math.abs(p2));
-            max = Math.max(max, Math.abs(p3));
-            max = Math.max(max, Math.abs(p4));
-            p1 /= max;
-            p2 /= max;
-            p3 /= max;
-            p4 /= max;
+
             m1.setPower(p1);
             m2.setPower(p2);
             m3.setPower(p3);
             m4.setPower(p4);
+
             telemetry.addData("Color","R %d  G %d  B %d", colorSensor.red(), colorSensor.green(), colorSensor.blue());
 //            Orientation orientation = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS);
             Orientation orientation = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS);
